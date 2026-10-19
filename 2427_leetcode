@@ -1,0 +1,29 @@
+class Solution {
+    public int commonFactors(int a, int b) {
+        // Find the Greatest Common Divisor
+        int gcdVal = gcd(a, b);
+        int count = 0;
+        
+        // Count factors of the GCD up to its square root
+        for (int i = 1; i * i <= gcdVal; i++) {
+            if (gcdVal % i == 0) {
+                count++; // i is a factor
+                if (i * i != gcdVal) {
+                    count++; // gcdVal / i is the matching paired factor
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    // Helper method to calculate GCD using Euclidean algorithm
+    private int gcd(int x, int y) {
+        while (y != 0) {
+            int temp = y;
+            y = x % y;
+            x = temp;
+        }
+        return x;
+    }
+}
