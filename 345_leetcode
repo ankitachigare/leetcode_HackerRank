@@ -1,0 +1,40 @@
+class Solution {
+    public String reverseVowels(String s) {
+        // 1. Convert string to char array so we can modify it
+        char[] arr = s.toCharArray();
+        
+        int i = 0;
+        int j = arr.length - 1;
+        
+        // 2. Use a single while loop with two pointers moving toward each other
+        while (i < j) {
+            
+            // Move the left pointer forward until it finds a vowel
+            while (i < j && !isVowel(arr[i])) {
+                i++;
+            }
+            
+            // Move the right pointer backward until it finds a vowel
+            while (i < j && !isVowel(arr[j])) {
+                j--;
+            }
+            
+            // 3. Swap the vowels
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        
+            // Move both pointers inward for the next iteration
+            i++;
+            j--;
+        }
+        
+        // 4. Convert the character array back to a String
+        return new String(arr);
+    
+    }
+    private boolean isVowel(char ch) {
+        ch = Character.toLowerCase(ch);
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+    }
+}
