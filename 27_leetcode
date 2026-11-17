@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+class Solution{
+    public int removeElement(int[] nums,int val){
+        Arrays.sort(nums); // Group all instances of val together
+        
+        int firstIndex=-1;
+        int count=0;
+        
+        // Find where val starts and how many times it appears
+        for(int i=0; i<nums.length;i++){
+            if(nums[i]==val){
+                if(firstIndex==-1){
+                    firstIndex=i;
+                }
+                count++;
+            }
+        }
+        
+        // If val is not in the array, return the full length
+        if(count==0){
+            return nums.length;
+        }
+        
+        // Shift elements after the val block to the left
+        for(int i=firstIndex+ count;i<nums.length;i++){
+            nums[i-count]=nums[i];
+        }
+        
+        return nums.length-count;
+    }
+}
